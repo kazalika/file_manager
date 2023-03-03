@@ -1,3 +1,5 @@
+#include <unistd.h>
+#include <sys/wait.h>
 #include "warning_screens.h"
 #include "path_operations.h"
 #include "deleter.h"

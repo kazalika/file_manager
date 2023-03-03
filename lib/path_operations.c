@@ -34,3 +34,11 @@ void add_to_dir(char *dir, const char *path) {
     dir[csz + psz] = '/';
     dir[csz + psz + 1] = '\0';
 }
+
+const char *get_extension(const char* filename) {
+    const char *cur_ch = filename;
+    while (*cur_ch != '.') {
+        cur_ch++;
+    }
+    return cur_ch;
+}

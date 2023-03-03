@@ -1,6 +1,0 @@
-/home/kazalika/caos-terminal/build/CMakeFiles/file_manager.dir
-/home/kazalika/caos-terminal/build/CMakeFiles/edit_cache.dir
-/home/kazalika/caos-terminal/build/CMakeFiles/rebuild_cache.dir
-/home/kazalika/caos-terminal/build/lib/CMakeFiles/library.dir
-/home/kazalika/caos-terminal/build/lib/CMakeFiles/edit_cache.dir
-/home/kazalika/caos-terminal/build/lib/CMakeFiles/rebuild_cache.dir

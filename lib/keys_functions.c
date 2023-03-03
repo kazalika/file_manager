@@ -1,6 +1,11 @@
 #include "keys_functions.h"
 #include "init.h"
 #include <curses.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 int copy_file(const char* to_dir, const char* src_dir) {
     if (strcmp(to_dir, src_dir) == 0) {
@@ -65,10 +70,95 @@ void key_DOWN() {
     cursor = (cursor + 1) % size_of_dir;
 }
 
+
+int find_prog_by_extension(const char *ext, char* progname) {
+    int fd = open("../extensions.txt", O_RDONLY);
+    if (fd < 0) {
+        return 1123;
+    }
+    int n = 0;
+    char buffer[100];
+    while ((n = read(fd, buffer, 31)) == 31) {
+        char *lst = buffer;
+        while (*lst != ' ') {
+            ++lst;
+        }
+        *lst = '\0';
+        // warning_screen(buffer);
+        if (strcmp(ext, buffer) == 0) {
+            while (*lst != '-') {
+                ++lst;
+            }
+            lst += 4;
+            char *prog_start = lst;
+            while (*lst != ' ') {
+                ++lst;
+            }
+            *lst = '\0';
+            strcpy(progname, prog_start);
+            close(fd);
+            return 0;
+        }
+    }
+    close(fd);
+    return -1;
+}
+
+int execute(const char* progname, const char* filename) {
+    pid_t pid;
+    int status;
+
+    // extra_exit(filename);
+
+    pid = fork();
+    if (pid == -1) {
+        extra_exit("BRUH -1");
+        return -1;
+    }
+    if (pid == 0) {
+        execlp(progname, progname, filename, NULL);
+        // extra_exit("BRUH 1");
+        return 1;
+    } else {
+        waitpid(pid, &status, 0);
+    }
+    return 0;
+}
+
 void key_ENTER() {
     struct dirent *x = list[cursor];
     if (x->d_type != DT_DIR) {
-        warning_screen("It's not a directory");
+
+        const char *ext = get_extension(x->d_name);
+        char *prog = calloc(100, sizeof(*prog));
+        int err = find_prog_by_extension(ext, prog);
+
+        if (err == 1123) {
+            free(prog);
+            warning_screen("extensions.txt is lost((");
+            return;   
+        }
+        if (err != 0) {
+            free(prog);
+            warning_screen("I can't open file with this extension");
+            return;
+        }
+
+        char *f_name = get_full_path(current_dir, x->d_name);
+        realpath(f_name, f_name);
+
+        endwin();
+        err = execute(prog, f_name);
+        initscr();
+
+        if (err != 0) {
+            free(prog);
+            free(f_name);
+            // extra_exit(f_name);
+            warning_screen("I couldn't execute the file");
+            return;
+        }
+
         return;
     }
     add_to_dir(current_dir, x->d_name);
@@ -151,14 +241,13 @@ void my_clear() {
     for (int i = 0; i < high; ++i) {
         printw("\n");
     }
+    refresh();
 }
 
 void key_P() {
     int row_start = high / 2 - 5;
 
     my_clear();
-
-    refresh();
 
     middle_write(row_start, "-> - your cursor");
     middle_write(row_start + 2, "P - help page  (you are here now)");

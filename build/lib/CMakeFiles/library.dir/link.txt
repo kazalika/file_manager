@@ -1,2 +1,0 @@
-/usr/bin/ar qc liblibrary.a CMakeFiles/library.dir/deleter.c.o CMakeFiles/library.dir/init.c.o CMakeFiles/library.dir/warning_screens.c.o CMakeFiles/library.dir/path_operations.c.o CMakeFiles/library.dir/keys_functions.c.o CMakeFiles/library.dir/screen.c.o
-/usr/bin/ranlib liblibrary.a

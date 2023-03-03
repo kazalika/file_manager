@@ -1,1 +1,0 @@
-/usr/bin/cc -rdynamic CMakeFiles/file_manager.dir/main.c.o -o file_manager  lib/liblibrary.a -lcurses -lform 
