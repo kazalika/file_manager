@@ -17,7 +17,7 @@ cmake --build .
 ```
 -> - your cursor
 
-P - help screen  < not implemented yet
+P - help page  < not implemented yet
 Q - quit file manager
 Enter - open selected folder or execute selected file 
                                  ^ not implemeted yet

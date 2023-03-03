@@ -6,6 +6,8 @@ int up_string = D_CURSOR;
 int down_string = D_CURSOR;
 int high;
 int weight;
+int key = 0;
+int size_of_dir = 0;
 struct dirent **list = NULL;
 char current_dir[1000] = "./";
 

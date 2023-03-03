@@ -1,7 +1,20 @@
+#pragma once
+
 #include <ncurses.h>
 #include <string.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <curses.h>
+#include <ncurses.h>
+#include <string.h>
+#include <dirent.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 enum {
     D_CURSOR = 0,
@@ -34,6 +47,8 @@ extern int up_string;
 extern int down_string;
 extern int high;
 extern int weight;
+extern int key;
+extern int size_of_dir;
 extern struct dirent **list;
 extern char current_dir[1000];
 
