@@ -9,6 +9,11 @@ cmake ..
 cmake --build .
 ```
 
+## Start
+```
+./file_manager
+```
+
 ## How to add executable types of files
 
 В корне репозитория есть файл extensions.txt
@@ -35,10 +40,7 @@ cmake --build .
 
 Менеджер ждет, пока вы закончите работу в файле и после этого снова прорисовывает окно.
 
-## Start
-```
-./file_manager
-```
+
 ## Help
 
 ```
