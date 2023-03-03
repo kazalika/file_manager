@@ -44,10 +44,10 @@ cmake --build .
 ```
 -> - your cursor
 
-P - help page  < not implemented yet
+P - help page
 Q - quit file manager
 Enter - open selected folder or execute selected file 
-                                 ^ not implemeted yet
+                                 
 C - copy seletected file
 X - cut selected file
 V - past file you copied or cut
